@@ -8,7 +8,7 @@ Shader "Building A Graph/Point"{
         };
         void ConfigureSurface(Input input,inout SurfaceOutputStandard surface){
             surface.Smoothness = .5;
-            surface.Albedo.rg = input.worldPos.xy*.5+.5;
+            surface.Albedo.rg = saturate(input.worldPos.xy*.5+.5);
         }
         ENDCG
     }

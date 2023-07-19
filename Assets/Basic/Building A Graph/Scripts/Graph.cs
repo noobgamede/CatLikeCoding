@@ -8,20 +8,35 @@ namespace CatLikeCoding.Basics
         [SerializeField, Range(10, 100)] int _Resolution = 10;
         #endregion
 
+        #region Private Variabels
+        Vector3 mPos = Vector3.zero;
+        Transform[] mCubeTransforms;
+        #endregion
+
         #region Unity Life Cycle
         void Awake()
         {
             var factore = 2f / _Resolution;
             var scale = Vector3.one * factore;
-            Vector3 pos = Vector3.zero;
+            mCubeTransforms = new Transform[_Resolution];
             for (int i = 0; i < _Resolution; ++i)
             {
-                var cube = Instantiate<GameObject>(_CubePrefab, transform);
-                cube.name = $"{i}";
-                pos = Vector3.right * ((i + .5f) * factore - 1);
-                pos.y = pos.x * pos.x * pos.x;
-                cube.transform.position = pos;
-                cube.transform.localScale = scale;
+                var cubeTransform = mCubeTransforms[i] = Instantiate<GameObject>(_CubePrefab, transform).transform;
+                cubeTransform.name = $"{i}";
+                mPos = Vector3.right * ((i + .5f) * factore - 1);
+                cubeTransform.position = mPos;
+                cubeTransform.localScale = scale;
+            }
+        }
+
+        void Update()
+        {
+            float time = Time.time;
+            for (int i = 0; i < mCubeTransforms.Length; ++i)
+            {
+                mPos = mCubeTransforms[i].position;
+                mPos.y = Mathf.Sin(Mathf.PI*(mPos.x+time));
+                mCubeTransforms[i].position = mPos;
             }
         }
         #endregion
