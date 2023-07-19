@@ -19,7 +19,7 @@ namespace CatLikeCoding.Basics
                 var cube = Instantiate<GameObject>(_CubePrefab, transform);
                 cube.name = $"{i}";
                 pos = Vector3.right * ((i + .5f) * factore - 1);
-                pos.y = pos.x;
+                pos.y = pos.x * pos.x * pos.x;
                 cube.transform.position = pos;
                 cube.transform.localScale = scale;
             }
