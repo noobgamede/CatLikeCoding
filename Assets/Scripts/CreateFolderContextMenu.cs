@@ -10,7 +10,8 @@ public class CreateFolderContextMenu
         "Materials",
         "Scenes",
         "Scripts",
-        "Prefabs"
+        "Prefabs",
+        "Shaders"
     };
     #endregion
 
